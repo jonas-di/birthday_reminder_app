@@ -1,0 +1,7 @@
+TODOs:
+
+- rewrite addFriend() in home_viewmodel to use a map as an argument.
+
+- rewrite home_view with 2 segments:
+> upper is a Friendslist with a listelement for each Friend
+> lower is a add a new Friend Section with From Fields for the Name and Datepicker for Birthday

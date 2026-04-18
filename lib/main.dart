@@ -24,7 +24,7 @@ void main() {
     databaseService: databaseService,
   );
 
-  WidgetsFlutterBinding.ensureInitialized;
+  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
     MultiProvider(

@@ -18,10 +18,10 @@ class FriendsRepository {
 
   Future<Result<Friend>> createFriend(Map<String, String> friend) async {
     if (!_database.isOpen()) {
-      debugPrint('Repo: Try to open Database');
+      debugPrint('Opening database ...');
       await _database.open();
+      debugPrint('Opened Database');
     }
-    debugPrint('Repo: Try to add friend');
     return await _database.insert(friend);
   }
 
@@ -30,5 +30,10 @@ class FriendsRepository {
       await _database.open();
     }
     return _database.delete(id);
+  }
+
+  Future<Result<void>> sendTestnotification() async {
+    return Result.ok(null);
+    //TODO: Add notification logic
   }
 }

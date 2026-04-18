@@ -9,6 +9,11 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(icon: Icon(Icons.notification_add), onPressed: () {}),
+        ],
+      ),
       // the Home Screen Body consists of 2 Areas a [Friendslist] and a [FriendsCreator] Widget.
       body: SafeArea(
         child: Container(
@@ -61,10 +66,12 @@ class FriendsList extends StatelessWidget {
                     '${friendsList[index].birthday.day}.${friendsList[index].birthday.month}.${friendsList[index].birthday.year}',
                   ),
                   trailing: IconButton(
-                    onPressed: () => context
-                        .read<HomeViewmodel>()
-                        .removeFriend
-                        .execute(friendsList[index].id),
+                    onPressed: () {
+                      debugPrint('Removing friend ...');
+                      context.read<HomeViewmodel>().removeFriend.execute(
+                        friendsList[index].id,
+                      );
+                    },
                     icon: const Icon(Icons.delete),
                   ),
                 );
@@ -159,9 +166,7 @@ class _FriendCreatorState extends State<FriendCreator> {
                 'lastName': _lastNameController.text,
                 'birthday': _birthdayController.text,
               });
-              debugPrint(
-                'Add friend with Name: ${_firstNameController.text}, ${_lastNameController.text} Birthday: ${_birthdayController.text}',
-              );
+              debugPrint('Adding new friend ...');
             },
             child: Text('add Friend'),
           ),
@@ -171,7 +176,6 @@ class _FriendCreatorState extends State<FriendCreator> {
   }
 
   void _onAdd() {
-    debugPrint('Try to clear Textfields');
     if (context.read<HomeViewmodel>().addFriend.completed) {
       context.read<HomeViewmodel>().addFriend.clearResult();
       _firstNameController.clear();

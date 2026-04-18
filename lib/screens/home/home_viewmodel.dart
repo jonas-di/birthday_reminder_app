@@ -24,10 +24,12 @@ class HomeViewmodel extends ChangeNotifier {
 
   Future<Result<void>> _load() async {
     try {
+      debugPrint('Loading friends...');
       final result = await _friendsRepository.fetchFriends();
       switch (result) {
         case Ok<List<Friend>>():
           _friends = result.value;
+          debugPrint('Loaded ${result.value.length} friend/s');
           return Result.ok(null);
         case Error():
           return Result.error(result.error);
@@ -41,11 +43,11 @@ class HomeViewmodel extends ChangeNotifier {
 
   Future<Result<void>> _addFriend(Map<String, String> friend) async {
     try {
-      debugPrint('VM: Try add friend');
       final result = await _friendsRepository.createFriend(friend);
       switch (result) {
         case Ok<Friend>():
           _friends.add(result.value);
+          debugPrint('Added friend with id: ${result.value.id} ');
           return Result.ok(null);
         case Error():
           return Result.error(result.error);
@@ -63,6 +65,7 @@ class HomeViewmodel extends ChangeNotifier {
       switch (result) {
         case Ok<void>():
           _friends.removeWhere((friend) => friend.id == id);
+          debugPrint('Removed friend with id: $id');
           return Result.ok(null);
         case Error():
           return Result.error(result.error);
@@ -71,6 +74,15 @@ class HomeViewmodel extends ChangeNotifier {
       return Result.error(e);
     } finally {
       notifyListeners();
+    }
+  }
+
+  Future<Result<void>> sendLocalNotification() async {
+    try {
+      final result = await _friendsRepository.sendTestnotification();
+      return Result.ok(result);
+    } on Exception catch (e) {
+      return Result.error(e);
     }
   }
 }

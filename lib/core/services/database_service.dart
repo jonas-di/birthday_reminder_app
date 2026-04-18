@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tier_birthday/core/models/friend_model.dart';
@@ -40,7 +39,6 @@ class DatabaseService {
         },
       ),
     );
-    debugPrint('Database has been opened');
   }
 
   Future<Result<List<Friend>>> getAll() async {

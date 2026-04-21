@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tier_birthday/core/models/friend_model.dart';
+import 'package:tier_birthday/core/services/local_notification_service.dart';
 import 'package:tier_birthday/screens/home/home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,7 +12,12 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(icon: Icon(Icons.notification_add), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.notification_add),
+            onPressed: () {
+              LocalNotificationService().sendTestNotification();
+            },
+          ),
         ],
       ),
       // the Home Screen Body consists of 2 Areas a [Friendslist] and a [FriendsCreator] Widget.

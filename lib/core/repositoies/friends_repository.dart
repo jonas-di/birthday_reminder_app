@@ -31,9 +31,4 @@ class FriendsRepository {
     }
     return _database.delete(id);
   }
-
-  Future<Result<void>> sendTestnotification() async {
-    return Result.ok(null);
-    //TODO: Add notification logic
-  }
 }

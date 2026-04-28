@@ -95,6 +95,7 @@ class LocalNotificationService {
   Future<void> sendBirthdayNotification({
     required int id,
     required String friendName,
+    required int friendAge,
   }) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
@@ -119,7 +120,7 @@ class LocalNotificationService {
     await _plugin.show(
       id: id,
       title: 'Birthday Today! 🎉',
-      body: '$friendName has a birthday today!',
+      body: '$friendName is getting $friendAge years old!',
       notificationDetails: details,
     );
   }

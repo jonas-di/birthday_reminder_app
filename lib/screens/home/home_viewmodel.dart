@@ -76,13 +76,4 @@ class HomeViewmodel extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  Future<Result<void>> sendLocalNotification() async {
-    try {
-      final result = await _friendsRepository.sendTestnotification();
-      return Result.ok(result);
-    } on Exception catch (e) {
-      return Result.error(e);
-    }
-  }
 }

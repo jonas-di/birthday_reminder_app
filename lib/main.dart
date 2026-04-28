@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tier_birthday/core/repositoies/friends_repository.dart';
+import 'package:tier_birthday/core/services/background_task_service.dart';
 import 'package:tier_birthday/core/services/database_service.dart';
 import 'package:tier_birthday/core/services/local_notification_service.dart';
 import 'package:tier_birthday/screens/home/home_view.dart';
@@ -31,6 +32,15 @@ void main() async {
   final notificationService = LocalNotificationService();
   await notificationService.initialize();
   await notificationService.requestPermissions();
+
+  // Initialize background tasks
+  await BackgroundTaskService.initializeWorkManager();
+  await BackgroundTaskService.schedulePeriodicBirthdayCheck();
+
+  // iOS only
+  if (Platform.isIOS) {
+    await BackgroundTaskService.initializeBackgroundFetch();
+  }
 
   runApp(
     MultiProvider(

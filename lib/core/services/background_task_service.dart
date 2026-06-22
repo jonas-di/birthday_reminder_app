@@ -1,8 +1,8 @@
 // lib/core/services/background_task_service.dart
-import 'package:flutter/widgets.dart';
+/*import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tier_birthday/core/models/friend_model.dart';
-import 'package:tier_birthday/core/repositoies/friends_repository.dart';
+import 'package:tier_birthday/core/models/contact_model.dart';
+import 'package:tier_birthday/core/repositoies/contact_repository.dart';
 import 'package:tier_birthday/core/services/database_service.dart';
 import 'package:tier_birthday/utils/result.dart';
 import 'package:workmanager/workmanager.dart';
@@ -45,7 +45,9 @@ Future<void> _checkAndNotifyBirthdays() async {
   final databaseService = DatabaseService(databaseFactory: databaseFactory);
 
   // 2. Create Repository
-  final friendsRepository = FriendsRepository(databaseService: databaseService);
+  final friendsRepository = ContactsRepository(
+    databaseService: databaseService,
+  );
 
   //3. Get friends from Repository
   final result = await friendsRepository.fetchFriends();
@@ -60,7 +62,7 @@ Future<void> _checkAndNotifyBirthdays() async {
       final friends = value;
       final today = DateTime.now();
 
-      for (Friend friend in friends) {
+      for (Contact friend in friends) {
         if (friend.birthday.month == today.month &&
             friend.birthday.day == today.day) {
           final age = today.year - friend.birthday.year;
@@ -142,4 +144,4 @@ class BackgroundTaskService {
   static Future<void> cancelBirthdayCheck() async {
     await Workmanager().cancelByTag(birthdayCheckTask);
   }
-}
+}*/

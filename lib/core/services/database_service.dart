@@ -1,6 +1,6 @@
-import 'package:path/path.dart';
+/*import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tier_birthday/core/models/friend_model.dart';
+import 'package:tier_birthday/core/models/contact_model.dart';
 import 'package:tier_birthday/utils/result.dart';
 
 class DatabaseService {
@@ -41,7 +41,7 @@ class DatabaseService {
     );
   }
 
-  Future<Result<List<Friend>>> getAll() async {
+  Future<Result<List<Contact>>> getAll() async {
     try {
       final entries = await _db!.query(
         _friendsTableName,
@@ -56,7 +56,7 @@ class DatabaseService {
       );
       final list = entries
           .map(
-            (element) => Friend(
+            (element) => Contact(
               id: element[_friendsIdColumnName] as int,
               firstName: element[_friendsFirstNameColumnName] as String,
               lastName: element[_friendsLastNameColumnName] as String,
@@ -74,7 +74,7 @@ class DatabaseService {
     }
   }
 
-  Future<Result<Friend>> insert(Map<String, String> friend) async {
+  Future<Result<Contact>> insert(Map<String, String> friend) async {
     try {
       final birthday = DateTime(
         int.parse(friend['birthday']!.substring(0, 4)),
@@ -89,7 +89,7 @@ class DatabaseService {
         _friendsBirthDayColumnName: birthday.day,
       });
       return Result.ok(
-        Friend(
+        Contact(
           id: id,
           firstName: friend['firstName']!,
           lastName: friend['lastName']!,
@@ -122,3 +122,4 @@ class DatabaseService {
     _db = null;
   }
 }
+*/

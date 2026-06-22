@@ -1,12 +1,12 @@
-import 'package:flutter/widgets.dart';
-import 'package:tier_birthday/core/models/friend_model.dart';
+/*import 'package:flutter/widgets.dart';
+import 'package:tier_birthday/core/models/contact_model.dart';
 import 'package:tier_birthday/utils/command.dart';
 import 'package:tier_birthday/utils/result.dart';
-import 'package:tier_birthday/core/repositoies/friends_repository.dart';
+import 'package:tier_birthday/core/repositoies/contact_repository.dart';
 
 class HomeViewmodel extends ChangeNotifier {
-  final FriendsRepository _friendsRepository;
-  HomeViewmodel({required FriendsRepository friendsRepository})
+  final ContactsRepository _friendsRepository;
+  HomeViewmodel({required ContactsRepository friendsRepository})
     : _friendsRepository = friendsRepository {
     load = Command0<void>(_load)..execute();
     addFriend = Command1<void, Map<String, String>>(_addFriend);
@@ -19,15 +19,15 @@ class HomeViewmodel extends ChangeNotifier {
 
   late Command1<void, int> removeFriend;
 
-  List<Friend> _friends = [];
-  List<Friend> get friendsList => _friends;
+  List<Contact> _friends = [];
+  List<Contact> get friendsList => _friends;
 
   Future<Result<void>> _load() async {
     try {
       debugPrint('Loading friends...');
       final result = await _friendsRepository.fetchFriends();
       switch (result) {
-        case Ok<List<Friend>>():
+        case Ok<List<Contact>>():
           _friends = result.value;
           debugPrint('Loaded ${result.value.length} friend/s');
           return Result.ok(null);
@@ -45,7 +45,7 @@ class HomeViewmodel extends ChangeNotifier {
     try {
       final result = await _friendsRepository.createFriend(friend);
       switch (result) {
-        case Ok<Friend>():
+        case Ok<Contact>():
           _friends.add(result.value);
           debugPrint('Added friend with id: ${result.value.id} ');
           return Result.ok(null);
@@ -76,4 +76,4 @@ class HomeViewmodel extends ChangeNotifier {
       notifyListeners();
     }
   }
-}
+}*/

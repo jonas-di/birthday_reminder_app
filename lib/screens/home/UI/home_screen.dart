@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           case HomeLoadingState():
             return Scaffold(
               body: Center(
-                child: CircularProgressIndicator(color: AppColor.primary),
+                child: CircularProgressIndicator(color: AppColor.textBlack),
               ),
             );
 
@@ -82,7 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              body: SizedBox(
+              body: Container(
+                padding: EdgeInsets.all(8),
                 child: ListView.builder(
                   itemCount: contacts.length,
                   itemBuilder: (context, index) =>

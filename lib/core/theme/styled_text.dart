@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tier_birthday/core/theme/colors.dart';
 
 class MonoFontText extends StatelessWidget {
   final String text;
@@ -15,13 +16,19 @@ class MonoFontText extends StatelessWidget {
 class StyledText extends StatelessWidget {
   final String text;
   final Color color;
-  const StyledText(this.text, {super.key, this.color = Colors.black});
+  final double fontSize;
+  const StyledText(
+    this.text, {
+    super.key,
+    this.color = AppColor.textBlack,
+    this.fontSize = 16,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.permanentMarker(fontSize: 20, color: color),
+      style: GoogleFonts.permanentMarker(fontSize: fontSize, color: color),
     );
   }
 }

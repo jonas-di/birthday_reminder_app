@@ -1,15 +1,14 @@
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_contacts/models/contact/contact.dart'
     as flutter_contacts;
-import 'package:flutter_contacts/models/labels/event_label.dart';
 import 'package:tier_birthday/core/models/contact_extension_model.dart';
 
 class Contact {
   //This [Contact] Class Contains 2 Subclasses.
   //
   // An other [Contact] class coming  from the Flutter Contacts Package.
-  // The Contacts provided my this Package are the local saved Contacts the User
-  // has saved on the phone this app is installed on.
+  // The Contacts provided by this Package are the local saved contacts the user
+  // has saved on this phone.
   final flutter_contacts.Contact _flutterContact;
 
   //And an [ContactExtension] Class. This Class is a Extension to the
@@ -42,4 +41,6 @@ class Contact {
   String get linkedID => _extension.flutterContactsId;
 
   Photo? get profilePicture => _flutterContact.photo;
+
+  Tier get tier => _extension.tier;
 }

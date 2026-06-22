@@ -47,6 +47,7 @@ class ContactRepository {
                   flutterContact: flutterContact,
                   extension: ContactExtension(
                     flutterContactsId: flutterContact.id!,
+                    tier: Tier.S,
                   ),
                 ),
               );

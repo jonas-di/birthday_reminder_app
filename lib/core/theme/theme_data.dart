@@ -8,6 +8,6 @@ final ThemeData primaryTheme = ThemeData(
   //AppBar
   appBarTheme: AppBarTheme(
     centerTitle: true,
-    backgroundColor: AppColor.primary,
+    backgroundColor: AppColor.primaryBg,
   ),
 );

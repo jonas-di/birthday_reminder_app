@@ -40,53 +40,103 @@ class ContactListTile extends StatelessWidget {
       'Dez',
     ];
     return Container(
-      //style
-      height: 100,
-      width: double.maxFinite,
-
-      padding: EdgeInsets.fromLTRB(0, 8, 16, 8),
       margin: EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: color,
-      ),
 
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
-          //left part
-          CircleAvatar(
-            radius: 42,
-            foregroundImage: contact.profilePicture?.thumbnail != null
-                ? MemoryImage(contact.profilePicture!.thumbnail!)
-                : null,
-
-            backgroundColor: color,
-            child: StyledText(contact.name![0], fontSize: 48),
+          //left part - picture
+          SizedBox(
+            height: 96,
+            width: 96,
+            child: contact.profilePicture?.thumbnail == null
+                ? Container(
+                    color: Color(0xffC3557A),
+                    child: Center(
+                      child: StyledText(
+                        contact.name![0],
+                        fontSize: 48,
+                        color: AppColor.primaryBg,
+                      ),
+                    ),
+                  )
+                : Image.memory(
+                    contact.profilePicture!.thumbnail!,
+                    fit: BoxFit.fill,
+                  ),
           ),
-          SizedBox(width: 8),
 
-          //middle part
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StyledText('${contact.name}', fontSize: 24),
-              Icon(Icons.notifications, size: 24, color: AppColor.textDisabled),
-            ],
+          //middle part - name, age, notification
+          Expanded(
+            child: Container(
+              //style
+              height: 96,
+              padding: EdgeInsets.fromLTRB(16, 8, 8, 8),
+              color: color,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  StyledText('${contact.name}', fontSize: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      StyledText(
+                        'Age: 21',
+                        color: AppColor.textGray,
+                        fontSize: 20,
+                      ),
+                      Expanded(child: SizedBox()),
+                      NumberedIcon(number: 0, icon: Icons.card_giftcard),
+                      SizedBox(width: 16),
+                      NumberedIcon(number: 3, icon: Icons.notifications),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          Expanded(child: SizedBox()),
 
           //right part
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              StyledText(contact.birthday!.day.toString(), fontSize: 36),
-              StyledText(monthsShort[contact.birthday!.month], fontSize: 20),
-            ],
+          Container(
+            height: 96,
+            padding: EdgeInsets.fromLTRB(8, 8, 16, 8),
+
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.horizontal(right: Radius.circular(8)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                StyledText(contact.birthday!.day.toString(), fontSize: 36),
+                StyledText(monthsShort[contact.birthday!.month], fontSize: 20),
+              ],
+            ),
           ),
-          SizedBox(width: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class NumberedIcon extends StatelessWidget {
+  final int number;
+  final IconData icon;
+
+  const NumberedIcon({super.key, required this.number, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    final Color color = number == 0 ? AppColor.textDisabled : AppColor.textGray;
+
+    return SizedBox(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          StyledText(number.toString(), fontSize: 20, color: color),
+          SizedBox(width: 4),
+          Icon(icon, color: color, size: 24),
         ],
       ),
     );
